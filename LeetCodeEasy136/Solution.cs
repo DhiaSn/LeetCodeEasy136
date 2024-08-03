@@ -10,20 +10,15 @@ namespace LeetCodeEasy136
     {
         public static int SingleNumber(int[] nums)
         {
-            if(nums.Length == 1)
+            if (nums.Length == 1)
                 return nums[0];
 
-            Dictionary<int,int> track = new Dictionary<int,int>();
+            int result = nums[0];
 
-            for (int i = 0; i < nums.Length; i++)
-            {
-                if (track.TryGetValue(nums[i], out int value))
-                    track[nums[i]] = ++value;
-                else
-                    track.Add(nums[i], 1);
-            }
+            for (int i = 1; i < nums.Length; i++)
+                result ^= nums[i];
 
-            return track.FirstOrDefault(x => x.Value == 1).Key; 
+            return result;
         }
     }
 }
